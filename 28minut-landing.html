@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28minut.pl – Teraz część Modelarni</title>
+  <meta name="description" content="Studio 28minut EMS zmieniło markę i jest teraz częścią Modelarni – kobiecego ekosystemu fitness." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+  /* ── Reset ────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #fff;
+    color: #1a1614;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Design tokens ────────────────────────────────────────────────── */
+  :root {
+    --pink:        #FF2F92;
+    --pink-soft:   #FF6BB5;
+    --pink-pale:   #fff0f7;
+    --pink-border: rgba(255, 47, 146, 0.18);
+    --pink-glow:   rgba(255, 47, 146, 0.14);
+
+    --text:        #1a1614;
+    --text-mid:    #4b4541;
+    --text-muted:  #8a8480;
+
+    --white:  #ffffff;
+    --cream:  #faf8f5;
+    --stone:  #f2efe9;
+    --border: rgba(0,0,0,0.07);
+  }
+
+  /* ── Reveal animation ─────────────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
+                transform 0.75s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ══════════════════════════════════════════════════════════════
+     NAVBAR
+  ══════════════════════════════════════════════════════════════ */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 300;
+    height: 66px;
+    padding: 0 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.45s ease, border-color 0.45s ease,
+                backdrop-filter 0.45s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .navbar.scrolled {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-color: rgba(0,0,0,0.06);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.03em;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.35s;
+  }
+  .navbar.scrolled .nav-logo { color: var(--text); }
+
+  /* Scroll caret white on dark hero */
+  .scroll-caret { color: rgba(255,255,255,0.6); }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 0 3px rgba(255,47,146,0.2);
+    flex-shrink: 0;
+  }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--pink);
+    color: #fff;
+    border-radius: 100px;
+    padding: 10px 22px;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    box-shadow: 0 3px 16px rgba(255,47,146,0.22);
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                background 0.2s, box-shadow 0.25s;
+  }
+  .nav-cta:hover {
+    background: var(--pink-soft);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(255,47,146,0.3);
+  }
+
+  @media (max-width: 640px) {
+    .navbar { padding: 0 20px; }
+    .nav-cta { padding: 9px 16px; font-size: 12.5px; }
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     HERO
+  ══════════════════════════════════════════════════════════════ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 24px 90px;
+    overflow: hidden;
+  }
+
+  /* Photo background — blurred directly, no white fog */
+  .hero-photo {
+    position: absolute;
+    inset: -40px;
+    background-image: url('DSCF8213.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    filter: blur(5px) brightness(1.04) saturate(1.05);
+    transform: scale(1.08);
+    z-index: 0;
+  }
+
+  /* Dark overlay — classic cinematic photo treatment */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.48);
+    z-index: 1;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+  }
+
+  /* ── Eyebrow pill ── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .pill-pink {
+    background: rgba(255,47,146,0.09);
+    color: #d4006e;
+    border: 1px solid rgba(255,47,146,0.16);
+  }
+  .pill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 5.5vw, 68px);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin: 0 0 22px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+
+  /* Second line — exact pink of the primary CTA button */
+  .grad {
+    color: #FF2F92;
+    -webkit-text-fill-color: #FF2F92;
+    background: none;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 1.75vw, 19px);
+    color: rgba(255,255,255,0.82);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 auto 38px;
+    font-weight: 400;
+  }
+  .hero-sub span { display: block; }
+
+  /* CTA row */
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: transform 0.28s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.28s ease, background 0.2s;
+  }
+  .btn-fill {
+    background: var(--pink);
+    color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 4px 20px rgba(255,47,146,0.22);
+  }
+  .btn-fill:hover {
+    background: var(--pink-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(255,47,146,0.3);
+  }
+  .btn-fill.lg { padding: 17px 36px; font-size: 16px; }
+  .btn-outline {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    padding: 14px 26px;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.7);
+    transform: translateY(-2px);
+  }
+  /* Light outline for use on non-photo sections */
+  .btn-outline-light {
+    background: transparent;
+    color: var(--text);
+    padding: 14px 26px;
+    border: 1.5px solid rgba(0,0,0,0.14);
+  }
+  .btn-outline-light:hover {
+    border-color: var(--pink);
+    color: #d4006e;
+    transform: translateY(-2px);
+  }
+
+  /* Scroll caret */
+  .scroll-caret {
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    color: var(--text-muted);
+    opacity: 0.55; z-index: 3;
+    animation: caretBob 2.8s ease-in-out infinite;
+  }
+  .scroll-caret span { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+  @keyframes caretBob {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(5px); }
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     SHARED SECTION STYLES
+  ══════════════════════════════════════════════════════════════ */
+  .section { padding: 96px 24px; }
+  .section.cream { background: var(--cream); }
+  .section.stone { background: var(--stone); }
+  .section.white { background: var(--white); }
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-head { text-align: center; margin-bottom: 40px; }
+  .section-head h2 {
+    font-size: clamp(24px, 3.2vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    color: var(--text);
+    margin-top: 0;
+    margin-bottom: 8px;
+    line-height: 1.12;
+  }
+  .divider-line {
+    width: 32px; height: 2px;
+    background: var(--pink);
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+  .section-sub {
+    font-size: 15.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 14px auto 0;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     "CO SIĘ ZMIENIA" CARDS
+  ══════════════════════════════════════════════════════════════ */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 20px;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.35s ease, border-color 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+    border-color: rgba(255,47,146,0.2);
+  }
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .card-icon svg { width: 19px; height: 19px; }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 7px;
+  }
+  .card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
+
+  /* Image + text split block */
+  .split-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 36px;
+  }
+  .split-block-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 18px;
+    display: block;
+  }
+  .split-block-text {}
+  .split-block-text h3 {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .split-block-divider {
+    width: 32px; height: 2px;
+    background: var(--pink);
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .split-block-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .split-block-text p strong {
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+  .split-block-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--pink);
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: gap 0.25s ease;
+  }
+  .split-block-link:hover { gap: 11px; }
+  @media (max-width: 768px) {
+    .split-block {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     BRAND BRIDGE
+  ══════════════════════════════════════════════════════════════ */
+  .bridge-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 52px;
+  }
+  .chip {
+    border-radius: 22px;
+    padding: 26px 40px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .chip-light {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .chip-pink {
+    background: linear-gradient(135deg, #FF2F92 0%, #d020b8 100%);
+    box-shadow: 0 8px 32px rgba(255,47,146,0.22);
+  }
+  .chip-label {
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .chip-brand {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .chip-sub { font-size: 12px; margin-top: 5px; }
+
+  .bridge-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    animation: arrowSlide 2.4s ease-in-out infinite;
+  }
+  .bridge-arrow-label {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  @keyframes arrowSlide {
+    0%,100% { transform: translateX(0); opacity: 0.55; }
+    50%      { transform: translateX(7px); opacity: 1; }
+  }
+
+  /* Timeline */
+  .timeline { max-width: 640px; margin: 64px auto 0; }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 1fr 44px 1fr;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+  .tl-row:last-child { margin-bottom: 0; }
+  .tl-spine { display: flex; flex-direction: column; align-items: center; }
+  .tl-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 0 4px rgba(255,47,146,0.12);
+    flex-shrink: 0; margin-top: 4px;
+  }
+  .tl-line {
+    width: 1.5px;
+    flex-grow: 1;
+    min-height: 32px;
+    background: linear-gradient(to bottom, rgba(255,47,146,0.28), rgba(255,47,146,0.08));
+    margin-top: 8px;
+  }
+  .tl-year { font-size: 11.5px; font-weight: 700; color: var(--pink); letter-spacing: 0.05em; }
+  .tl-title { font-weight: 600; font-size: 15px; letter-spacing: -0.02em; color: var(--text); margin: 4px 0 6px; }
+  .tl-text { color: var(--text-muted); font-size: 13.5px; line-height: 1.7; }
+  .tl-empty { opacity: 0; pointer-events: none; }
+
+  /* ══════════════════════════════════════════════════════════════
+     FEATURE TILES — icon + text + photo
+  ══════════════════════════════════════════════════════════════ */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .feat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.35s ease, border-color 0.3s;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+  }
+  .feat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+    border-color: rgba(255,47,146,0.2);
+  }
+  .feat-top {
+    padding: 20px 16px 16px;
+  }
+  .feat-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .feat-icon svg { width: 20px; height: 20px; }
+  .feat-title {
+    font-weight: 700;
+    font-size: 13.5px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .feat-sub {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .feat-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-top: auto;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     FINAL CTA  (light — soft blush gradient, no dark background)
+  ══════════════════════════════════════════════════════════════ */
+  .final-section {
+    background: linear-gradient(140deg, #fff5fa 0%, #fde8f4 40%, #f8e8ff 100%);
+    padding: 112px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Soft decorative circles */
+  .final-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(255,47,146,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .final-section::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(192,38,211,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .final-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+  .final-inner h2 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin: 24px 0 16px;
+  }
+  .final-sub {
+    font-size: 17px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    max-width: 460px;
+    margin: 0 auto 42px;
+  }
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 52px;
+    padding-top: 44px;
+    border-top: 1px solid rgba(255,47,146,0.14);
+  }
+  .stat-n { font-size: 30px; font-weight: 800; color: #d4006e; letter-spacing: -0.04em; }
+  .stat-l { font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 3px; }
+
+  /* ══════════════════════════════════════════════════════════════
+     FOOTER  (warm dark, not pure black — reads premium not gamer)
+  ══════════════════════════════════════════════════════════════ */
+  footer {
+    background: #1c1512;
+    padding: 64px 24px 36px;
+  }
+  .footer-grid {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 44px;
+    padding-bottom: 48px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-logo {
+    display: flex; align-items: center; gap: 9px;
+    font-weight: 800; font-size: 16px;
+    letter-spacing: -0.03em; color: #fff;
+    margin-bottom: 13px;
+  }
+  .footer-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+  .footer-p { font-size: 13px; color: rgba(255,255,255,0.32); line-height: 1.75; }
+  .social-row { display: flex; gap: 10px; margin-top: 20px; }
+  .social-btn {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .social-btn svg { width: 16px; height: 16px; }
+  .social-btn:hover {
+    background: rgba(255,47,146,0.14);
+    color: var(--pink);
+    border-color: rgba(255,47,146,0.28);
+  }
+  .footer-col h5 {
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+  .footer-link {
+    display: block;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.42);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: #fff; }
+  .footer-contact { font-size: 13.5px; color: rgba(255,255,255,0.38); line-height: 1.9; }
+  .footer-contact a { color: var(--pink); text-decoration: none; }
+  .footer-bottom {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  /* ══════════════════════════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .section { padding: 64px 20px; }
+    .final-section { padding: 72px 20px; }
+    .chip { padding: 18px 24px; }
+    .chip-brand { font-size: 24px; }
+    .tl-row { gap: 12px; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="nav-logo">
+      <span class="nav-dot"></span>
+      28minut<span style="color:var(--pink)">.pl</span>
+    </a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+
+      <!-- Headline -->
+      <h1 class="reveal visible">
+        28minut jest teraz<br>
+        <span class="grad">częścią Modelarni</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="hero-sub reveal visible">
+        <span>Trening EMS, który znasz, działa dalej —</span>
+        <span>teraz w nowej odsłonie, w kobiecej przestrzeni Modelarni.</span>
+      </p>
+
+      <!-- CTAs -->
+      <div class="cta-row reveal visible">
+        <a href="https://modelarniafitness.pl/trening-ems"
+           target="_blank" rel="noopener noreferrer" class="btn btn-fill">
+          Przejdź do treningu EMS w Modelarni
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="#zmiany" class="btn btn-outline">Dowiedz się, co się zmieniło</a>
+      </div>
+    </div>
+
+    <!-- Scroll caret -->
+    <div class="scroll-caret">
+      <span>Przewiń</span>
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       CO SIĘ ZMIENIA
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section cream" id="zmiany" style="padding-top:64px;padding-bottom:64px">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <h2>Zmiana nazwy, nie filozofii.</h2>
+        <div class="divider-line"></div>
+        <p class="section-sub">Studio 28minut ewoluuje — nie znika. Poniżej wyjaśniamy, co dokładnie się zmienia.</p>
+      </div>
+
+      <div class="cards-grid">
+
+        <div class="card reveal">
+          <div class="card-icon" style="background:rgba(255,47,146,0.08);color:var(--pink)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+              <line x1="7" y1="7" x2="7.01" y2="7"/>
+            </svg>
+          </div>
+          <h3>Nowa marka</h3>
+          <p>Studio 28minut działa teraz pod marką Modelarnia.</p>
+        </div>
+
+        <div class="card reveal" style="transition-delay:70ms">
+          <div class="card-icon" style="background:rgba(124,58,237,0.08);color:#7c3aed">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" viewBox="0 0 24 24">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3>Ta sama usługa EMS</h3>
+          <p>Trening elektrostymulacyjny EMS nadal jest dostępny — teraz jako część szerszej oferty Modelarni.</p>
+        </div>
+
+        <div class="card reveal" style="transition-delay:140ms">
+          <div class="card-icon" style="background:rgba(14,165,233,0.08);color:#0ea5e9">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Tylko dla kobiet</h3>
+          <p>Modelarnia to przestrzeń treningu, regeneracji i ruchu stworzona dla kobiet.</p>
+        </div>
+
+        <div class="card reveal" style="transition-delay:210ms">
+          <div class="card-icon" style="background:rgba(16,185,129,0.08);color:#10b981">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5L12 2z"/>
+            </svg>
+          </div>
+          <h3>Więcej możliwości</h3>
+          <p>Poza EMS możesz skorzystać także z siłowni, zajęć grupowych, regeneracji i opieki trenerek.</p>
+        </div>
+
+      </div>
+
+      <!-- Image + text split -->
+      <div class="split-block reveal">
+        <img
+          src="DSCF7862.jpg"
+          alt="Trenerka Modelarni podczas sesji EMS"
+          class="split-block-img"
+        />
+        <div class="split-block-text">
+          <h3>To nadal ten sam trening.</h3>
+          <div class="split-block-divider"></div>
+          <p>
+            <strong>Zmienia się marka i możliwości —<br>
+            nie podejście do kobiet, treningu i atmosfery.</strong>
+          </p>
+          <p>
+            Modelarnia rozwija ideę 28minut, dodając nową przestrzeń,
+            społeczność i szerszą ofertę ruchu dla kobiet.
+          </p>
+          <a href="https://modelarniafitness.pl" target="_blank" rel="noopener noreferrer" class="split-block-link">
+            Poznaj przestrzeń Modelarni
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       BRAND BRIDGE
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section white" style="text-align:center">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <h2>Jedno studio. Dwie ery.</h2>
+        <div class="divider-line"></div>
+        <p class="section-sub">Wszystko, co zbudowałyśmy przez lata, staje się fundamentem Modelarni.</p>
+      </div>
+
+      <!-- Chips -->
+      <div class="bridge-row reveal">
+
+        <!-- 28minut chip — logo as inline SVG -->
+        <div class="chip chip-light">
+          <div class="chip-label" style="color:var(--text-muted)">Pierwotna marka</div>
+          <div style="margin:12px 0 10px">
+            <svg viewBox="0 0 210 54" xmlns="http://www.w3.org/2000/svg" width="162" height="42">
+              <text x="2" y="40"
+                    font-family="'Inter',-apple-system,BlinkMacSystemFont,sans-serif"
+                    font-weight="800" font-size="38" letter-spacing="-1.5"
+                    fill="#1a1614">28minut.pl</text>
+              <!-- Blue baseline -->
+              <rect x="2" y="47.5" width="200" height="3.5" fill="#00AEEF" rx="1.75"/>
+              <!-- Pink accent (shorter, right-aligned) -->
+              <rect x="158" y="47.5" width="44" height="3.5" fill="#E0006A" rx="1.75"/>
+            </svg>
+          </div>
+          <div class="chip-sub" style="color:var(--text-muted)">Studio EMS</div>
+        </div>
+
+        <div class="bridge-arrow">
+          <div class="bridge-arrow-label">kontynuuje jako</div>
+          <svg width="54" height="16" viewBox="0 0 54 16" fill="none">
+            <path d="M0 8 H44 M36 2 L44 8 L36 14"
+                  stroke="var(--pink)" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Modelarnia chip — real logo image -->
+        <div class="chip chip-pink">
+          <div class="chip-label" style="color:rgba(255,255,255,0.65)">Nowa marka</div>
+          <div style="width:66px;height:66px;border-radius:50%;overflow:hidden;
+                      margin:10px auto 8px;box-shadow:0 2px 16px rgba(0,0,0,0.18);">
+            <img src="Logo Modelarnia.jpg" alt="Modelarnia logo"
+                 style="width:100%;height:100%;object-fit:cover;transform:scale(1.08);"/>
+          </div>
+          <div class="chip-brand" style="color:#fff">Modelarnia</div>
+          <div class="chip-sub" style="color:rgba(255,255,255,0.7)">EMS & Fitness dla kobiet</div>
+        </div>
+
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+
+        <div class="tl-row reveal">
+          <div class="tl-content right" style="text-align:right">
+            <div class="tl-year">Początki</div>
+            <div class="tl-title">Narodziny 28minut.pl</div>
+            <div class="tl-text">Pierwsze studio EMS dedykowane kobietom. Nowe podejście do treningu w 28 minut.</div>
+          </div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-empty"><div class="tl-year">—</div></div>
+        </div>
+
+        <div class="tl-row reveal" style="transition-delay:80ms">
+          <div class="tl-empty tl-empty-r" style="text-align:right"><div class="tl-year">—</div></div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-year">Wzrost</div>
+            <div class="tl-title">Zaufanie setek kobiet</div>
+            <div class="tl-text">Lata efektywnych treningów, certyfikowane trenerki i sprawdzona metoda EMS.</div>
+          </div>
+        </div>
+
+        <div class="tl-row reveal" style="transition-delay:160ms">
+          <div class="tl-content" style="text-align:right">
+            <div class="tl-year">2024</div>
+            <div class="tl-title">Dołączenie do Modelarni</div>
+            <div class="tl-text">Studio 28minut zmienia markę i wchodzi w skład Modelarni — kobiecego ekosystemu fitness.</div>
+          </div>
+          <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-empty"><div class="tl-year">—</div></div>
+        </div>
+
+        <div class="tl-row reveal" style="transition-delay:240ms">
+          <div class="tl-empty tl-empty-r" style="text-align:right"><div class="tl-year">—</div></div>
+          <div class="tl-spine"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-year">Dziś</div>
+            <div class="tl-title">Modelarnia EMS</div>
+            <div class="tl-text">Pełna oferta: EMS, siłownia, zajęcia, regeneracja. Ten sam poziom, więcej możliwości.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       CZYM JEST MODELARNIA — FEATURE TILES
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="section stone" style="text-align:center">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <h2>Kompletna przestrzeń dla kobiet.</h2>
+        <div class="divider-line"></div>
+        <p class="section-sub">Siłownia, EMS, zajęcia i regeneracja w jednym miejscu, z pełną opieką trenerek.</p>
+      </div>
+
+      <div class="features-grid">
+
+        <!-- Trening EMS -->
+        <div class="feat reveal" style="transition-delay:0ms">
+          <div class="feat-top">
+            <div class="feat-icon" style="background:rgba(255,47,146,0.09);color:var(--pink)">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" viewBox="0 0 24 24">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <div class="feat-title">Trening EMS</div>
+            <div class="feat-sub">28 min = efekt 2h siłowni</div>
+          </div>
+          <img src="ems.jpg" alt="Trening EMS" class="feat-photo" />
+        </div>
+
+        <!-- Siłownia dla kobiet -->
+        <div class="feat reveal" style="transition-delay:60ms">
+          <div class="feat-top">
+            <div class="feat-icon" style="background:rgba(192,38,211,0.09);color:#c026d3">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                <line x1="6" y1="1" x2="6" y2="4"/>
+                <line x1="10" y1="1" x2="10" y2="4"/>
+                <line x1="14" y1="1" x2="14" y2="4"/>
+              </svg>
+            </div>
+            <div class="feat-title">Siłownia dla kobiet</div>
+            <div class="feat-sub">Wyłącznie damska przestrzeń</div>
+          </div>
+          <img src="silownia.jpg" alt="Siłownia dla kobiet" class="feat-photo" />
+        </div>
+
+        <!-- Zajęcia grupowe -->
+        <div class="feat reveal" style="transition-delay:120ms">
+          <div class="feat-top">
+            <div class="feat-icon" style="background:rgba(124,58,237,0.09);color:#7c3aed">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" viewBox="0 0 24 24">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <div class="feat-title">Zajęcia grupowe</div>
+            <div class="feat-sub">Motywacja w społeczności</div>
+          </div>
+          <img src="zajeciagrupowe.jpg" alt="Zajęcia grupowe" class="feat-photo" />
+        </div>
+
+        <!-- Regeneracja -->
+        <div class="feat reveal" style="transition-delay:180ms">
+          <div class="feat-top">
+            <div class="feat-icon" style="background:rgba(14,165,233,0.09);color:#0ea5e9">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M17 8C8 10 5.9 16.17 3.82 19.2 2.8 20.74 3.17 22 4.28 22c.64 0 1.4-.3 2.2-.75"/>
+                <path d="M2 22a15.44 15.44 0 0 0 9-8.5"/>
+                <path d="M21 7c0 9-7 14-7 14S7 16 7 7a7 7 0 0 1 14 0Z"/>
+              </svg>
+            </div>
+            <div class="feat-title">Regeneracja</div>
+            <div class="feat-sub">Ciało potrzebuje odpoczynku</div>
+          </div>
+          <img src="BM2.jpg" alt="Regeneracja" class="feat-photo" />
+        </div>
+
+        <!-- Społeczność -->
+        <div class="feat reveal" style="transition-delay:240ms">
+          <div class="feat-top">
+            <div class="feat-icon" style="background:rgba(16,185,129,0.09);color:#10b981">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="feat-title">Społeczność</div>
+            <div class="feat-sub">Kobiety, które rozumieją</div>
+          </div>
+          <img src="spolecznosc.jpg" alt="Społeczność" class="feat-photo" />
+        </div>
+
+        <!-- Opieka trenerek -->
+        <div class="feat reveal" style="transition-delay:300ms">
+          <div class="feat-top">
+            <div class="feat-icon" style="background:rgba(245,158,11,0.09);color:#d97706">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="feat-title">Opieka trenerek</div>
+            <div class="feat-sub">Bezpieczeństwo i efekty</div>
+          </div>
+          <img src="trening personalny.jpg" alt="Opieka trenerek" class="feat-photo" />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       FINAL CTA — soft blush, light and welcoming
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="final-section">
+    <div class="final-inner reveal">
+      <h2>
+        Kontynuuj trening EMS<br>
+        <span class="grad">w Modelarni</span>
+      </h2>
+      <p class="final-sub">
+        Kliknij poniżej, aby przejść do aktualnej podstrony treningu EMS
+        i kontynuować to, co zaczęłaś.
+      </p>
+      <div class="cta-row">
+        <a href="https://modelarniafitness.pl/trening-ems"
+           target="_blank" rel="noopener noreferrer" class="btn btn-fill lg">
+          Przejdź do strony EMS
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="https://modelarniafitness.pl"
+           target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
+          Poznaj całą Modelarnię
+        </a>
+      </div>
+
+      <div class="stats-row">
+        <div>
+          <div class="stat-n">500+</div>
+          <div class="stat-l">klientek</div>
+        </div>
+        <div>
+          <div class="stat-n">28 min</div>
+          <div class="stat-l">treningu</div>
+        </div>
+        <div>
+          <div class="stat-n">5★</div>
+          <div class="stat-l">ocena</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <span class="footer-dot"></span>
+          28minut<span style="color:var(--pink)">.pl</span>
+        </div>
+        <p class="footer-p">
+          28minut.pl to teraz część Modelarni — kobiecego ekosystemu fitness nowej generacji.
+        </p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/modelarnia_fitness_dla_kobiet/"
+             target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/p/Modelarnia-świadomy-fitness-100063838876254/?locale=pl_PL"
+             target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Modelarnia</h5>
+        <a href="https://modelarniafitness.pl/ems" target="_blank" rel="noopener noreferrer" class="footer-link">Trening EMS</a>
+        <a href="https://modelarniafitness.pl/siłownia" target="_blank" rel="noopener noreferrer" class="footer-link">Siłownia</a>
+        <a href="https://modelarniafitness.pl/zajecia-grupowe" target="_blank" rel="noopener noreferrer" class="footer-link">Zajęcia grupowe</a>
+        <a href="https://modelarniafitness.pl/kontakt" target="_blank" rel="noopener noreferrer" class="footer-link">Kontakt</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Kontakt</h5>
+        <p class="footer-contact">
+          modelarniafitness.pl<br>
+          Bielsko-Biała, Polska<br>
+          <a href="mailto:kontakt@modelarniafitness.pl">kontakt@modelarniafitness.pl</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Modelarnia Fitness. 28minut.pl jest częścią Modelarni.</span>
+      <span class="footer-copy">Zbudowane z <span style="color:var(--pink)">♥</span> dla kobiet</span>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       JS — scroll reveal + navbar
+  ══════════════════════════════════════════════════════════════ -->
+  <script>
+    /* Navbar scroll glass effect */
+    const navbar = document.getElementById('navbar');
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Intersection Observer — reveal on scroll */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (!el.classList.contains('visible')) io.observe(el);
+    });
+  </script>
+</body>
+</html>
