@@ -151,7 +151,7 @@
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.48);
+    background: rgba(0,0,0,0.22);
     z-index: 1;
   }
 
@@ -328,6 +328,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 18px;
+    align-items: stretch;
   }
   .card {
     background: var(--white);
@@ -562,7 +563,7 @@
   }
   .feat-photo {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 5/3;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -732,14 +733,14 @@
 
       <!-- Headline -->
       <h1 class="reveal visible">
-        28minut jest teraz<br>
-        <span class="grad">częścią Modelarni</span>
+        Trening EMS 28minut<br>
+        <span class="grad">działa teraz w Modelarni</span>
       </h1>
 
       <!-- Subheadline -->
       <p class="hero-sub reveal visible">
-        <span>Trening EMS, który znasz, działa dalej —</span>
-        <span>teraz w nowej odsłonie, w kobiecej przestrzeni Modelarni.</span>
+        <span>Jedyne w Bielsku-Białej studio EMS wyłącznie dla kobiet.</span>
+        <span>teraz działa w przestrzeni Modelarni.</span>
       </p>
 
       <!-- CTAs -->
@@ -774,7 +775,6 @@
     <div class="section-inner">
       <div class="section-head reveal">
         <h2>Zmiana nazwy, nie filozofii.</h2>
-        <div class="divider-line"></div>
         <p class="section-sub">Studio 28minut ewoluuje — nie znika. Poniżej wyjaśniamy, co dokładnie się zmienia.</p>
       </div>
 
@@ -789,7 +789,7 @@
             </svg>
           </div>
           <h3>Nowa marka</h3>
-          <p>Studio 28minut działa teraz pod marką Modelarnia.</p>
+          <p>Studio 28minut rozwija się teraz jako niezależna część Modelarni.</p>
         </div>
 
         <div class="card reveal" style="transition-delay:70ms">
@@ -800,7 +800,7 @@
             </svg>
           </div>
           <h3>Ta sama usługa EMS</h3>
-          <p>Trening elektrostymulacyjny EMS nadal jest dostępny — teraz jako część szerszej oferty Modelarni.</p>
+          <p>Ten sam trening EMS dla kobiet — teraz w przestrzeni Modelarni.</p>
         </div>
 
         <div class="card reveal" style="transition-delay:140ms">
@@ -814,7 +814,7 @@
             </svg>
           </div>
           <h3>Tylko dla kobiet</h3>
-          <p>Modelarnia to przestrzeń treningu, regeneracji i ruchu stworzona dla kobiet.</p>
+          <p>Teraz jesteśmy jedynym w Bielsku-Białej studiem EMS tylko dla Pań.</p>
         </div>
 
         <div class="card reveal" style="transition-delay:210ms">
@@ -825,7 +825,7 @@
             </svg>
           </div>
           <h3>Więcej możliwości</h3>
-          <p>Poza EMS możesz skorzystać także z siłowni, zajęć grupowych, regeneracji i opieki trenerek.</p>
+          <p>Poza EMS możesz korzystać także z treningów, zajęć grupowych, regeneracji i opieki trenerek.</p>
         </div>
 
       </div>
@@ -839,7 +839,6 @@
         />
         <div class="split-block-text">
           <h3>To nadal ten sam trening.</h3>
-          <div class="split-block-divider"></div>
           <p>
             <strong>Zmienia się marka i możliwości —<br>
             nie podejście do kobiet, treningu i atmosfery.</strong>
@@ -849,7 +848,7 @@
             społeczność i szerszą ofertę ruchu dla kobiet.
           </p>
           <a href="https://modelarniafitness.pl" target="_blank" rel="noopener noreferrer" class="split-block-link">
-            Poznaj przestrzeń Modelarni
+            Poznaj nową przestrzeń EMS
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"
                  stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
@@ -860,14 +859,12 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       BRAND BRIDGE
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="section white" style="text-align:center">
+  <!-- BRAND BRIDGE REMOVED -->
+  <section class="section white" style="display:none">
     <div class="section-inner">
       <div class="section-head reveal">
         <h2>Jedno studio. Dwie ery.</h2>
-        <div class="divider-line"></div>
+
         <p class="section-sub">Wszystko, co zbudowałyśmy przez lata, staje się fundamentem Modelarni.</p>
       </div>
 
@@ -965,12 +962,11 @@
   <!-- ══════════════════════════════════════════════════════════════
        CZYM JEST MODELARNIA — FEATURE TILES
   ══════════════════════════════════════════════════════════════ -->
-  <section class="section stone" style="text-align:center">
+  <section class="section stone" style="text-align:center;padding-top:48px;padding-bottom:48px;min-height:100vh;display:flex;align-items:center;">
     <div class="section-inner">
-      <div class="section-head reveal">
-        <h2>Kompletna przestrzeń dla kobiet.</h2>
-        <div class="divider-line"></div>
-        <p class="section-sub">Siłownia, EMS, zajęcia i regeneracja w jednym miejscu, z pełną opieką trenerek.</p>
+      <div class="section-head reveal" style="margin-bottom:24px">
+        <h2 style="font-size:clamp(22px,2.8vw,34px)">Kompletna przestrzeń dla kobiet.</h2>
+        <p class="section-sub" style="max-width:900px;white-space:nowrap;font-size:14px;margin-top:8px">EMS, trening, zajęcia i regeneracja w jednej kobiecej przestrzeni, z pełną opieką trenerek.</p>
       </div>
 
       <div class="features-grid">
@@ -985,7 +981,7 @@
               </svg>
             </div>
             <div class="feat-title">Trening EMS</div>
-            <div class="feat-sub">28 min = efekt 2h siłowni</div>
+            <div class="feat-sub">Kameralny trening 20 min dla kobiet</div>
           </div>
           <img src="ems.jpg" alt="Trening EMS" class="feat-photo" />
         </div>
@@ -1004,7 +1000,7 @@
               </svg>
             </div>
             <div class="feat-title">Siłownia dla kobiet</div>
-            <div class="feat-sub">Wyłącznie damska przestrzeń</div>
+            <div class="feat-sub">Przestrzeń treningowa</div>
           </div>
           <img src="silownia.jpg" alt="Siłownia dla kobiet" class="feat-photo" />
         </div>
@@ -1019,7 +1015,7 @@
               </svg>
             </div>
             <div class="feat-title">Zajęcia grupowe</div>
-            <div class="feat-sub">Motywacja w społeczności</div>
+            <div class="feat-sub">Kobieca energia wspólnego treningu</div>
           </div>
           <img src="zajeciagrupowe.jpg" alt="Zajęcia grupowe" class="feat-photo" />
         </div>
@@ -1036,7 +1032,7 @@
               </svg>
             </div>
             <div class="feat-title">Regeneracja</div>
-            <div class="feat-sub">Ciało potrzebuje odpoczynku</div>
+            <div class="feat-sub">Regeneracja i chwila dla siebie</div>
           </div>
           <img src="BM2.jpg" alt="Regeneracja" class="feat-photo" />
         </div>
@@ -1069,7 +1065,7 @@
               </svg>
             </div>
             <div class="feat-title">Opieka trenerek</div>
-            <div class="feat-sub">Bezpieczeństwo i efekty</div>
+            <div class="feat-sub">Indywidualna opieka i komfort treningu</div>
           </div>
           <img src="trening personalny.jpg" alt="Opieka trenerek" class="feat-photo" />
         </div>
@@ -1087,14 +1083,13 @@
         Kontynuuj trening EMS<br>
         <span class="grad">w Modelarni</span>
       </h2>
-      <p class="final-sub">
-        Kliknij poniżej, aby przejść do aktualnej podstrony treningu EMS
-        i kontynuować to, co zaczęłaś.
+      <p class="final-sub" style="white-space:nowrap">
+        Kontynuuj trening EMS w nowej przestrzeni stworzonej dla kobiet.
       </p>
       <div class="cta-row">
         <a href="https://modelarniafitness.pl/trening-ems"
            target="_blank" rel="noopener noreferrer" class="btn btn-fill lg">
-          Przejdź do strony EMS
+          Przejdź do treningu EMS
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12"/>
@@ -1113,8 +1108,8 @@
           <div class="stat-l">klientek</div>
         </div>
         <div>
-          <div class="stat-n">28 min</div>
-          <div class="stat-l">treningu</div>
+          <div class="stat-n">20 min</div>
+          <div class="stat-l">EMS</div>
         </div>
         <div>
           <div class="stat-n">5★</div>
