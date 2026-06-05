@@ -591,6 +591,31 @@
     font-size: 12px;
     line-height: 1.5;
   }
+  .feat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+  .feat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--pink);
+    background: rgba(255,47,146,0.08);
+    border-radius: 100px;
+    padding: 4px 10px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    font-family: 'Lexend', sans-serif;
+  }
+  .feat:hover .feat-chip {
+    background: var(--pink);
+    color: #fff;
+  }
   .feat-photo {
     width: 100%;
     aspect-ratio: 5/3;
@@ -1060,7 +1085,7 @@
       <!-- Kafelki -->
       <div class="features-grid reveal">
 
-        <div class="feat" style="transition-delay:0ms">
+        <a class="feat" href="https://modelarniafitness.pl/ems" target="_blank" rel="noopener noreferrer" style="transition-delay:0ms;text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1071,10 +1096,11 @@
             <div class="feat-title">Trening EMS</div>
             <div class="feat-sub">Kameralny trening 20 min dla kobiet</div>
           </div>
+          <div class="feat-footer"><span class="feat-chip">Więcej <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
           <img src="ems.jpg" alt="Trening EMS" class="feat-photo" />
-        </div>
+        </a>
 
-        <div class="feat" style="transition-delay:60ms">
+        <a class="feat" href="https://modelarniafitness.pl/si%C5%82ownia" target="_blank" rel="noopener noreferrer" style="transition-delay:60ms;text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1089,10 +1115,11 @@
             <div class="feat-title">Siłownia dla kobiet</div>
             <div class="feat-sub">Przestrzeń treningowa</div>
           </div>
+          <div class="feat-footer"><span class="feat-chip">Więcej <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
           <img src="silownia.jpg" alt="Siłownia dla kobiet" class="feat-photo" />
-        </div>
+        </a>
 
-        <div class="feat" style="transition-delay:120ms">
+        <a class="feat" href="https://modelarniafitness.pl/zajecia-grupowe" target="_blank" rel="noopener noreferrer" style="transition-delay:120ms;text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1106,10 +1133,11 @@
             <div class="feat-title">Zajęcia grupowe</div>
             <div class="feat-sub">Kobieca energia wspólnego treningu</div>
           </div>
+          <div class="feat-footer"><span class="feat-chip">Więcej <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
           <img src="zajeciagrupowe.jpg" alt="Zajęcia grupowe" class="feat-photo" />
-        </div>
+        </a>
 
-        <div class="feat" style="transition-delay:180ms">
+        <a class="feat" href="https://modelarniafitness.pl/bodymed" target="_blank" rel="noopener noreferrer" style="transition-delay:180ms;text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1120,10 +1148,11 @@
             <div class="feat-title">Regeneracja</div>
             <div class="feat-sub">Regeneracja i chwila dla siebie</div>
           </div>
+          <div class="feat-footer"><span class="feat-chip">Więcej <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
           <img src="BM2.jpg" alt="Regeneracja" class="feat-photo" />
-        </div>
+        </a>
 
-        <div class="feat" style="transition-delay:240ms">
+        <a class="feat" href="https://modelarniafitness.pl/nasza-spolecznosc" target="_blank" rel="noopener noreferrer" style="transition-delay:240ms;text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1137,10 +1166,11 @@
             <div class="feat-title">Społeczność</div>
             <div class="feat-sub">Kobiety, które rozumieją</div>
           </div>
+          <div class="feat-footer"><span class="feat-chip">Więcej <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
           <img src="spolecznosc.jpg" alt="Społeczność" class="feat-photo" />
-        </div>
+        </a>
 
-        <div class="feat" style="transition-delay:300ms">
+        <a class="feat" href="https://modelarniafitness.pl/trening-personalny" target="_blank" rel="noopener noreferrer" style="transition-delay:300ms;text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1151,8 +1181,9 @@
             <div class="feat-title">Opieka trenerek</div>
             <div class="feat-sub">Indywidualna opieka i komfort treningu</div>
           </div>
+          <div class="feat-footer"><span class="feat-chip">Więcej <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
           <img src="trening personalny.jpg" alt="Opieka trenerek" class="feat-photo" />
-        </div>
+        </a>
 
       </div>
 
