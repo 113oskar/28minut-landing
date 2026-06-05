@@ -55,11 +55,25 @@
   /* ── Reveal animation ─────────────────────────────────────────────── */
   .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
-                transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    transform: translateY(32px);
+    transition: opacity 1s cubic-bezier(0.25,1,0.5,1),
+                transform 1s cubic-bezier(0.25,1,0.5,1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Stagger dla dzieci .reveal-stagger */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.25,1,0.5,1),
+                transform 0.9s cubic-bezier(0.25,1,0.5,1);
+  }
+  .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay: 0ms; }
+  .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay: 80ms; }
+  .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay: 160ms; }
+  .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay: 240ms; }
+  .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay: 320ms; }
+  .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay: 400ms; }
 
   /* ══════════════════════════════════════════════════════════════
      NAVBAR
@@ -1084,9 +1098,9 @@
       </div>
 
       <!-- Kafelki -->
-      <div class="features-grid reveal">
+      <div class="features-grid reveal reveal-stagger">
 
-        <a class="feat" href="https://modelarniafitness.pl/ems" target="_blank" rel="noopener noreferrer" style="transition-delay:0ms;text-decoration:none;color:inherit;">
+        <a class="feat" href="https://modelarniafitness.pl/ems" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1101,7 +1115,7 @@
           <img src="ems.jpg" alt="Trening EMS" class="feat-photo" />
         </a>
 
-        <a class="feat" href="https://modelarniafitness.pl/si%C5%82ownia" target="_blank" rel="noopener noreferrer" style="transition-delay:60ms;text-decoration:none;color:inherit;">
+        <a class="feat" href="https://modelarniafitness.pl/si%C5%82ownia" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1120,7 +1134,7 @@
           <img src="silownia.jpg" alt="Siłownia dla kobiet" class="feat-photo" />
         </a>
 
-        <a class="feat" href="https://modelarniafitness.pl/zajecia-grupowe" target="_blank" rel="noopener noreferrer" style="transition-delay:120ms;text-decoration:none;color:inherit;">
+        <a class="feat" href="https://modelarniafitness.pl/zajecia-grupowe" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1138,7 +1152,7 @@
           <img src="zajeciagrupowe.jpg" alt="Zajęcia grupowe" class="feat-photo" />
         </a>
 
-        <a class="feat" href="https://modelarniafitness.pl/bodymed" target="_blank" rel="noopener noreferrer" style="transition-delay:180ms;text-decoration:none;color:inherit;">
+        <a class="feat" href="https://modelarniafitness.pl/bodymed" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1153,7 +1167,7 @@
           <img src="BM2.jpg" alt="Regeneracja" class="feat-photo" />
         </a>
 
-        <a class="feat" href="https://modelarniafitness.pl/nasza-spolecznosc" target="_blank" rel="noopener noreferrer" style="transition-delay:240ms;text-decoration:none;color:inherit;">
+        <a class="feat" href="https://modelarniafitness.pl/nasza-spolecznosc" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -1171,7 +1185,7 @@
           <img src="spolecznosc.jpg" alt="Społeczność" class="feat-photo" />
         </a>
 
-        <a class="feat" href="https://modelarniafitness.pl/trening-personalny" target="_blank" rel="noopener noreferrer" style="transition-delay:300ms;text-decoration:none;color:inherit;">
+        <a class="feat" href="https://modelarniafitness.pl/trening-personalny" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
           <div class="feat-top" style="text-align:center;">
             <div class="feat-icon" style="background:rgba(255,47,146,0.08);color:var(--pink);margin:0 auto 6px;">
               <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
