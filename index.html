@@ -806,19 +806,19 @@
     <div class="hero-inner">
 
       <!-- Headline -->
-      <h1 class="reveal visible">
+      <h1 class="reveal hero-reveal" style="transition-delay:100ms">
         Trening EMS 28minut<br>
         <span class="grad">działa teraz w Modelarni</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="hero-sub reveal visible">
+      <p class="hero-sub reveal hero-reveal" style="transition-delay:300ms">
         <span>Jedyne w Bielsku-Białej studio EMS wyłącznie dla kobiet.</span>
         <span>teraz działa w przestrzeni Modelarni.</span>
       </p>
 
       <!-- CTAs -->
-      <div class="cta-row reveal visible">
+      <div class="cta-row reveal hero-reveal" style="transition-delay:500ms">
         <a href="https://modelarniafitness.pl/ems"
            class="btn btn-fill">
           Trening EMS w Modelarni
@@ -1326,6 +1326,15 @@
        JS -scroll reveal + navbar
   ══════════════════════════════════════════════════════════════ -->
   <script>
+    /* Hero reveal on load */
+    window.addEventListener('load', () => {
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.hero-reveal').forEach(el => {
+          el.classList.add('visible');
+        });
+      });
+    });
+
     /* Navbar scroll glass effect */
     const navbar = document.getElementById('navbar');
     const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 30);
