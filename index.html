@@ -61,19 +61,7 @@
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* Stagger dla dzieci .reveal-stagger */
-  .reveal-stagger > * {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.9s cubic-bezier(0.25,1,0.5,1),
-                transform 0.9s cubic-bezier(0.25,1,0.5,1);
-  }
-  .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay: 0ms; }
-  .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay: 80ms; }
-  .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay: 160ms; }
-  .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay: 240ms; }
-  .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay: 320ms; }
-  .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay: 400ms; }
+  /* Stagger – obsługiwany przez JS */
 
   /* ══════════════════════════════════════════════════════════════
      NAVBAR
@@ -1334,6 +1322,28 @@
           el.classList.add('visible');
         });
       });
+    });
+
+    /* Stagger dzieci .reveal-stagger przez JS */
+    document.querySelectorAll('.reveal-stagger').forEach(parent => {
+      Array.from(parent.children).forEach((child, i) => {
+        child.style.opacity = '0';
+        child.style.transform = 'translateY(28px)';
+        child.style.transition = 'opacity 0.9s cubic-bezier(0.25,1,0.5,1), transform 0.9s cubic-bezier(0.25,1,0.5,1)';
+      });
+      const staggerIO = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          Array.from(parent.children).forEach((child, i) => {
+            setTimeout(() => {
+              child.style.opacity = '';
+              child.style.transform = '';
+              child.style.transitionDelay = '';
+            }, i * 90);
+          });
+          staggerIO.unobserve(parent);
+        }
+      }, { threshold: 0.06 });
+      staggerIO.observe(parent);
     });
 
     /* Navbar scroll glass effect */
