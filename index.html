@@ -1340,7 +1340,23 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.06 });
+
+    /* Auto-reveal: ręczne .reveal + wszystkie teksty poza hero */
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (!el.classList.contains('visible')) io.observe(el);
+    });
+
+    /* Nakładamy reveal na wszystkie teksty poza sekcją hero */
+    document.querySelectorAll(
+      'h1:not(.hero *), h2:not(.hero *), h3:not(.hero *), h4:not(.hero *), p:not(.hero *), .split-block-text, .tl-content, .footer-p, .footer-col'
+    ).forEach((el, i) => {
+      if (!el.closest('.reveal') && !el.classList.contains('reveal')) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min(i % 4 * 60, 180) + 'ms';
+        io.observe(el);
+      }
+    });
 
     document.querySelectorAll('.reveal').forEach(el => {
       if (!el.classList.contains('visible')) io.observe(el);
